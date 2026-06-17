@@ -1,0 +1,20 @@
+/* CUSTOMIZE: Replace with your app's global styles.
+ * Tailwind v4 example:
+ *   @import "tailwindcss";
+ *
+ * Or standard CSS reset:
+ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #fff;
+  color: #0f172a;
+}

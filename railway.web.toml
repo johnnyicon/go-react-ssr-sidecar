@@ -1,0 +1,20 @@
+[build]
+dockerfilePath = "Dockerfile.web"
+
+[deploy]
+startCommand = "./app-web"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+# CUSTOMIZE: Add any paths that should trigger a redeploy
+watchPatterns = [
+  "cmd/web/**",
+  "internal/**",
+  "static/**",
+  "frontend/src/**",
+  "frontend/index.html",
+  "frontend/package.json",
+  "frontend/vite.config*.ts",
+  "go.mod",
+  "go.sum",
+  "Dockerfile.web",
+]

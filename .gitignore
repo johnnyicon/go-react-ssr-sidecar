@@ -1,0 +1,25 @@
+# Go
+bin/
+*.exe
+*.test
+*.out
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+
+# Static embed (populated at build time — do not commit built assets)
+static/dist/*
+!static/dist/.gitkeep
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Editor
+.DS_Store
+.vscode/
+.idea/
+*.swp

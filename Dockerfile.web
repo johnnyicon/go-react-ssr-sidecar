@@ -1,0 +1,38 @@
+# Stage 1: Build the React frontend (client SPA + SSR bundle)
+# noExternal:true bundles all deps — no node_modules needed in the prod image.
+FROM node:20-alpine AS frontend-builder
+WORKDIR /app
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ .
+# CUSTOMIZE: Pass your build-time env vars here (e.g. API URL for VITE_API_URL)
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+# Client build → dist/   SSR bundle → dist-ssr/entry-server.js
+RUN npm run build && npm run build:ssr
+
+# Stage 2: Build the Go web binary with embedded frontend
+FROM golang:1.23-alpine AS go-builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+# Copy the built React SPA into the go:embed path
+COPY --from=frontend-builder /app/dist ./static/dist/
+RUN go build -buildvcs=false -o app-web ./cmd/web
+
+# Stage 3: Runtime — Node 20 (for the SSR sidecar) + Go binary
+# Node image provides the JS runtime needed for ssr-server.mjs.
+# No node_modules needed: the SSR bundle is fully self-contained.
+FROM node:20-alpine
+WORKDIR /app
+RUN apk add --no-cache ca-certificates tzdata
+COPY --from=go-builder /app/app-web .
+COPY --from=frontend-builder /app/dist-ssr ./dist-ssr/
+COPY --from=frontend-builder /app/ssr-server.mjs .
+EXPOSE 3000
+# Run ONLY the Go binary. Go owns the Node process lifecycle via
+# startSSRServer() (spawn + readiness poll + circuit breaker).
+# Do NOT start node here — it causes EADDRINUSE for the Go-spawned instance,
+# which permanently opens the SSR circuit breaker.
+CMD ["./app-web"]

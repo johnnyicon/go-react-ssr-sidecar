@@ -1,0 +1,14 @@
+[build]
+dockerfilePath = "Dockerfile.api"
+
+[deploy]
+startCommand = "./app-api"
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+watchPatterns = [
+  "cmd/api/**",
+  "internal/**",
+  "go.mod",
+  "go.sum",
+  "Dockerfile.api",
+]

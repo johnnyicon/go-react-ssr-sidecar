@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My App</title>
+
+    <!-- CUSTOMIZE: Add your favicon -->
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+
+    <!-- Preconnect to external domains your app fetches from.
+         Add CDN, image storage, and analytics domains here.
+         This hint fires immediately on page load, before JS executes.
+         See docs/07-lcp-optimization.md for why this matters. -->
+    <!-- <link rel="preconnect" href="https://your-cdn.example.com" /> -->
+
+    <!-- Critical CSS is injected here by Go's optimizeIndexHTML() at startup.
+         The main stylesheet below is converted to async-load.
+         See docs/03-critical-css.md. -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- React SPA mounts here. In SSR mode, Go pre-fills this div with the
+         rendered component tree before serving. React then hydrates it.
+         In CSR mode, React creates the DOM from scratch. -->
+    <script type="module" src="/src/main.tsx"></script>
+    <!-- CUSTOMIZE: Defer analytics until after the page is interactive.
+         window.addEventListener('load', ...) fires after all resources load.
+         This keeps analytics scripts off the critical path.
+         See docs/07-lcp-optimization.md. -->
+    <!--
+    <script>
+      window.addEventListener('load', function() {
+        // Your analytics initialization here
+      });
+    </script>
+    -->
+  </body>
+</html>
