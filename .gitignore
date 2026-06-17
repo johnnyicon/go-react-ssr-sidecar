@@ -11,7 +11,7 @@ frontend/dist-ssr/
 
 # Static embed (populated at build time — do not commit built assets)
 static/dist/*
-!static/dist/.gitkeep
+!static/dist/index.html
 
 # Environment
 .env
