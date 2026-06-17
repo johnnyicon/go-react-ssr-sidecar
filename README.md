@@ -57,7 +57,7 @@ Browser
 
 ```bash
 # 1. Clone and install frontend dependencies
-git clone https://github.com/johnnnyicon/go-react-ssr-sidecar
+git clone https://github.com/johnnyicon/go-react-ssr-sidecar
 cd go-react-ssr-sidecar
 cd frontend && npm install && cd ..
 

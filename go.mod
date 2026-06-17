@@ -1,4 +1,4 @@
-module github.com/johnnnyicon/go-react-ssr-sidecar
+module github.com/johnnyicon/go-react-ssr-sidecar
 
 go 1.23.0
 

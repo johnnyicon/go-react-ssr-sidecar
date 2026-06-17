@@ -44,7 +44,7 @@ import (
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
 	echoMiddleware "github.com/labstack/echo/v4/middleware"
-	appStatic "github.com/johnnnyicon/go-react-ssr-sidecar/static"
+	appStatic "github.com/johnnyicon/go-react-ssr-sidecar/static"
 )
 
 // ── Site constants ─────────────────────────────────────────────────────────
